@@ -6,16 +6,17 @@ public class StreetNigga  {
 	private ObjectOutputStream sOutput;		// to write on the socket
 	private Socket socket;
 	private StreetGUI cg;
-	private String server, username;
+	private String server, username, niggaID;
 	private int port;
-	StreetNigga(String server, int port, String username) {
+	StreetNigga(String server, int port, String username int id) {
 		// which calls the common constructor with the GUI set to null
-		this(server, port, username, null);
+		this(server, port, username, id, null);
 	}
 	StreetNigga(String server, int port, String username, ClientGUI cg) {
 		this.server = server;
 		this.port = port;
 		this.username = username;
+		this.niggaID = id;
 		// save if we are in GUI mode or not
 		this.cg = cg;
 	}
@@ -51,6 +52,7 @@ public class StreetNigga  {
 		try
 		{
 			sOutput.writeObject(username);
+			sOutput.writeObject(niggaID);
 		}
 		catch (IOException eIO) {
 			display("Exception doing login : " + eIO);
@@ -61,19 +63,12 @@ public class StreetNigga  {
 		return true;
 	}
 
-	/*
-	 * To send a message to the console or the GUI
-	 */
 	private void display(String msg) {
 		if(cg == null)
 			System.out.println(msg);      // println in console mode
 		else
 			cg.append(msg + "\n");		// append to the ClientGUI JTextArea (or whatever)
 	}
-	
-	/*
-	 * To send a message to the server
-	 */
 	void sendMessage(ChatMessage msg) {
 		try {
 			sOutput.writeObject(msg);
@@ -82,11 +77,6 @@ public class StreetNigga  {
 			display("Exception writing to server: " + e);
 		}
 	}
-
-	/*
-	 * When something goes wrong
-	 * Close the Input/Output streams and disconnect not much to do in the catch clause
-	 */
 	private void disconnect() {
 		try { 
 			if(sInput != null) sInput.close();
@@ -106,24 +96,6 @@ public class StreetNigga  {
 			cg.connectionFailed();
 			
 	}
-	/*
-	 * To start the Client in console mode use one of the following command
-	 * > java Client
-	 * > java Client username
-	 * > java Client username portNumber
-	 * > java Client username portNumber serverAddress
-	 * at the console prompt
-	 * If the portNumber is not specified 1500 is used
-	 * If the serverAddress is not specified "localHost" is used
-	 * If the username is not specified "Anonymous" is used
-	 * > java Client 
-	 * is equivalent to
-	 * > java Client Anonymous 1500 localhost 
-	 * are eqquivalent
-	 * 
-	 * In console mode, if an error occurs the program simply stops
-	 * when a GUI id used, the GUI is informed of the disconnection
-	 */
 	public static void main(String[] args) {
 		// default values
 		int portNumber = 1500;
