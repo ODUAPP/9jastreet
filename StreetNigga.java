@@ -1,41 +1,17 @@
-
-
 import java.net.*;
 import java.io.*;
 import java.util.*;
-
-/*
- * The StreetNigga that can be run both as a console or a GUI
- */
 public class StreetNigga  {
-
-	// for I/O
 	private ObjectInputStream sInput;		// to read from the socket
 	private ObjectOutputStream sOutput;		// to write on the socket
 	private Socket socket;
-
-	// if I use a GUI or not
 	private StreetGUI cg;
-	
-	// the server, the port and the username
 	private String server, username;
 	private int port;
-
-	/*
-	 *  Constructor called by console mode
-	 *  server: the server address
-	 *  port: the port number
-	 *  username: the username
-	 */
 	StreetNigga(String server, int port, String username) {
 		// which calls the common constructor with the GUI set to null
 		this(server, port, username, null);
 	}
-
-	/*
-	 * Constructor call when used from a GUI
-	 * in console mode the StreetNiggaGUI parameter is null
-	 */
 	StreetNigga(String server, int port, String username, ClientGUI cg) {
 		this.server = server;
 		this.port = port;
@@ -43,10 +19,6 @@ public class StreetNigga  {
 		// save if we are in GUI mode or not
 		this.cg = cg;
 	}
-	
-	/*
-	 * To start the dialog
-	 */
 	public boolean start() {
 		// try to connect to the server
 		try {
