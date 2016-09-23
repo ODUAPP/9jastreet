@@ -101,6 +101,7 @@ public class StreetNigga  {
 		int portNumber = 1500;
 		String serverAddress = "localhost";
 		String userName = "Anonymous";
+		int id = 0;
 
 		// depending of the number of arguments provided we fall through
 		switch(args.length) {
@@ -111,6 +112,14 @@ public class StreetNigga  {
 			case 2:
 				try {
 					portNumber = Integer.parseInt(args[1]);
+					id = Integer.parseInt(args[niggaID]);
+					if ( niggaID =! null)
+					{
+						display.fail("Ooops !!! You are a fake nigga");
+					}
+					else
+					niggaChat <GetLocation> (niggaName) = display.open("%s %d %.4f = %s",niggaName, niggaID, niggaMap, niggaLocation);
+					
 				}
 				catch(Exception e) {
 					System.out.println("Invalid port number.");
