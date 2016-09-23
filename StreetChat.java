@@ -6,29 +6,16 @@ public class StreetChat implements Serializable {
     private double streetLat;
     private double streetLong;
     private String message;
-
-     
     ChatMessage(int type, String message, double niggaLat, double niggaLong ) {
-
         this.type = type;
         this.message = message;
         this.streetLat = niggaLat;
         this.streetLong = niggaLong;
-        
-
     }
-    // getters
-
     int getType() {
-
-        return type;
-
+    return type;
     }
-
     String getMessage() {
-
-        return message;
-
+    return message;
     }
-
 }
