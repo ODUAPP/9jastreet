@@ -15,6 +15,11 @@ public class StreetChat implements Serializable {
     int getType() {
     return type;
     }
+    
+    Double getNiggaLocation()
+    {
+     return niggaLat + niggaLong;
+    }
     String getMessage() {
     return message;
     }
